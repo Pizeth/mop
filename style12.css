@@ -1,0 +1,206 @@
+/*
+::::::::::::Stylesheet by:::::::::::
+::  Name: Mam Piseth              ::
+::  Email: seth.razeth@snt.gov.kh ::
+:::::::::::::::::::::::::::::::::::: 
+Theme Name: MoP WordPress
+Author: Piseth Mam
+Description: Bootstrap template converted to WordPress
+Version: 0.0.1
+Tags: bootstrap, MoP
+*/
+@charset "utf-8";
+@import url('css/bootstrap.css');
+@import url('css/flag-icon.css');
+@import url('css/imagehover.css');
+@import url('css/wave.css');
+@import url('css/hover.css');
+/* @import url('css/smartadmin-production.css'); */
+/* @import url('css/dataTables.bootstrap.css'); */
+/* @import url('css/font-awesome.min.css'); */
+@import url('css/photo-stack.css');
+@import url('css/blueimp-gallery.css');
+@import url('css/bootstrap-image-gallery.min.css');
+@import url('css/non-responsive.css');
+@import url('css/bootstrap-social.css');
+@import url(https://fonts.googleapis.com/css?family=Battambang);
+@import url(https://fonts.googleapis.com/css?family=Moul);
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+@import url('css/slick.css');
+@import url('css/lightbox.css');
+@import url('css/attr.css');
+@import url('css/crocodoc.viewer.css');
+@import url('https://fonts.googleapis.com/css?family=Hanuman&subset=khmer');
+
+
+/* Carousel */
+.carousel.fade {
+	opacity: 1;
+}
+.carousel.fade .item {
+	-moz-transition: opacity ease-in-out .7s;
+	-o-transition: opacity ease-in-out .7s;
+	-webkit-transition: opacity ease-in-out .7s;
+	transition: opacity ease-in-out .7s;
+	left: 0 !important;
+	opacity: 0;
+	top: 0;
+	position: absolute;
+	width: 100%;
+	display: block !important;
+	z-index: 1;
+}
+.carousel.fade .item:first-child {
+	top: auto;
+	position: relative;
+}
+.carousel.fade .item.active {
+	opacity: 1;
+	-moz-transition: opacity ease-in-out .7s;
+	-o-transition: opacity ease-in-out .7s;
+	-webkit-transition: opacity ease-in-out .7s;
+	transition: opacity ease-in-out .7s;
+	z-index: 2;
+}
+.slide-show {
+	padding: 0px;
+	margin-bottom: 5px;
+	z-index: 0;
+}
+.slide-show .carousel {
+	padding-right: 0px;
+}
+@media screen and (max-width: 767px) {
+	.slide-show .carousel {}
+}
+.slide-show .carousel-inner {
+	background: #fff;
+}
+.slide-show .img-slide {
+	margin: 0px;
+	padding: 0px;
+}
+.slide-show .slide-img-wrap {
+	overflow: hidden;
+	max-height: 350px;
+}
+.slide-show .slide-img-wrap img {
+	width: 100%;
+}
+.slide-show .img-slide img {
+	position: relative;
+	height: auto;
+	width: 100%;
+}
+.slide-show .item {
+	height: 100%;
+}
+.slide-show .carousel-caption {
+	width: 100%;
+	left: 0px;
+	bottom: 0px;
+}
+.slide-show .carousel-caption .carousel-caption-inner {
+	height: auto;
+	word-wrap: break-word;
+	background: rgba(0, 0, 0, 0.27);
+	width: 100%;
+	bottom: 0px;
+	position: absolute;
+	padding: 9px 30px;
+}
+.slide-show .slide-title {
+	padding-right: 60px;
+	color: #FFFFFF;
+	text-shadow: none;
+	font-size: 13px;
+	font-weight: normal;
+	text-align: left;
+	white-space: nowrap;
+	display: block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.slide-show a {
+	text-decoration: none;
+}
+.slide-show .slide-title-xs .slide-title {
+	padding: 10px;
+	background: #0386BD;
+	color: #fff;
+	text-decoration: none;
+}
+.slide-show .carousel-caption p {
+	color: #FFFFFF;
+	margin: 0px;
+	text-shadow: none;
+	font-size: 13px;
+	text-align: left;
+}
+.slide-show .inicators-wrap {
+	position: absolute;
+	width: 100%;
+	bottom: 0px;
+}
+.slide-show .carousel-indicators {
+	width: auto;
+	right: 10px;
+	left: auto;
+	bottom: -6px;
+}
+.slide-show .carousel-indicators li {
+	width: 14px;
+	height: 14px;
+}
+.slide-show .carousel-indicators .active {
+	width: 15px;
+	height: 15px;
+}
+.carousel-control {
+	width: 50px;
+	font-size: 15px;
+	background: none!important;
+	opacity: 0;
+	z-index: 999;
+}
+.carousel-control:hover {
+	width: 40px;
+	font-size: 15px;
+	background: none!important;
+	opacity: 1;
+}
+.carousel-control span {
+	padding: 8px;
+	display: block;
+	width: 50px!important;
+	height: 50px;
+	height: 50px;
+	cursor: pointer;
+}
+.carousel-control.left span {
+	background: url(../img/white_arrow-left.png) center;
+}
+.carousel-control.right span {
+	background: url(../img/white_arrow-right.png) center;
+}
+.carousel-control span {
+	top: 40%!important;
+	position: absolute;
+}
+.right.carousel-control span {
+	right: 10%!important;
+}
+.left.carousel-control span {
+	left: 10%!important;
+}
+.slide-title-response {
+	text-decoration: none!important;
+	bottom: 0;
+	background: rgba(0, 0, 0, 0.25);
+	padding: 5px;
+}
+.slide-title-response .slide-title {
+	color: #fff;
+	text-shadow: none;
+	font-size: 100%;
+}
