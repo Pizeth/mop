@@ -48,9 +48,9 @@ function themonic_theme_customizer( $wp_customize ) {
 		'settings' => 'mop_logo',
 	) ) );
 
-	$wp_customize->add_section( 'minister_section' , array(
+	$wp_customize->add_section( 'mop_minister_section' , array(
 		'title'       => __( 'Minister Image', 'iconic-one' ),
-		'priority'    => 30,
+		'priority'    => 31,
 		'description' => 'Upload an image to replace the default Minister image in the minister section.',
 		) );
 	$wp_customize->add_setting( 'minister_img' , array('default' => '', 'sanitize_callback' => 'esc_url_raw',));

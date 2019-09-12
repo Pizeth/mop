@@ -8,16 +8,16 @@ Author: Vivek Marakana
 Author URI: http://htmlcsstutor.com
 */
 
-include("tabbed-login-shortcode.php");
+// include("tabbed-login-shortcode.php");
 add_action( 'widgets_init', 'tabbed_load_login_widget' );
 
 function tabbed_load_login_widget() {
 
 	$plugin_url = (is_ssl()) ? str_replace('http://','https://', trailingslashit(get_template_directory_uri())) : trailingslashit(get_template_directory_uri());
 	// CSS
-	$sidebar_login_css = $plugin_url . '/inc/css/tabbed-login.css';
-    wp_register_style('tabbed_login_css_styles', $sidebar_login_css);
-    wp_enqueue_style('tabbed_login_css_styles');
+	// $sidebar_login_css = $plugin_url . '/inc/css/tabbed-login.css';
+    // wp_register_style('tabbed_login_css_styles', $sidebar_login_css);
+    // wp_enqueue_style('tabbed_login_css_styles');
 
 	load_plugin_textdomain('tabbed-login', false, '/inc/lang/');
 	// Scripts
@@ -57,9 +57,11 @@ class tabbed_login_Widget extends WP_Widget {
 		echo $before_widget;
 ?>
 
-	<?php global $user_ID, $user_identity,$current_url;
-		  $current_url='http'.(empty($_SERVER['HTTPS'])?'':'s').'://'.$_SERVER['SERVER_NAME'].($_SERVER['SERVER_PORT']!='80'?':'.$_SERVER['SERVER_PORT']:'').$_SERVER['REQUEST_URI'];
-	get_currentuserinfo(); if (!$user_ID) { ?>
+<?php 
+	global $user_ID, $user_identity, $current_url;
+	$current_url='http'.(empty($_SERVER['HTTPS'])?'':'s').'://'.$_SERVER['SERVER_NAME'].($_SERVER['SERVER_PORT']!='80'?':'.$_SERVER['SERVER_PORT']:'').$_SERVER['REQUEST_URI'];
+	get_currentuserinfo(); if (!$user_ID) { 
+?>
 
 <div id="login-register-password">
 	<ul class="tabs_login">

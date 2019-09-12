@@ -1,4 +1,4 @@
-    <footer id="footer">
+    <footer class="footer">
 		<div class="footer-top">
 			<a class="shine" href="<?php echo get_bloginfo('wpurl');?>">
                 <figure>
@@ -282,8 +282,10 @@
 			</div>
 		</div>
 	</footer>
+    <!-- </div> -->
     <!-- <div id="content"></div> -->
     <div class="td-scroll-up td-scroll-up-visible" id="toTop"><i class="td-icon-menu-up"></i></div>
+    <div class="md-overlay"></div>
     <button class="back-to-top" type="button">
         <!-- <span class="fa-stack fa-2x">
             <i class="fas fa-circle fa-stack-2x"></i>
@@ -291,6 +293,7 @@
         </span> -->
         <i class="fas fa-chevron-up fa-lg"></i>
     </button>
+    
 
 
     <!-- <footer class="footer">
@@ -359,7 +362,7 @@
 
 
   
-    <!-- <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script> -->
+   
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" 
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" 
         crossorigin="anonymous">
@@ -368,17 +371,8 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" 
         crossorigin="anonymous">
     </script> -->
-	<!-- <script language="javascript" src="https://www.mptc.gov.kh/assets/js/jquery-1.10.2.min.js" type=
-	"text/javascript">
-    </script> 
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" 
+	<!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" 
         integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous">
-    </script>
-	<script language="javascript" src="https://www.mptc.gov.kh/assets/js/jquery-ui-1.10.3.min.js"
-	type="text/javascript">
-	</script> 
-	<script language="javascript" src="https://www.mptc.gov.kh/assets/js/bootstrap.min.js" type=
-	"text/javascript">
     </script>  -->
     <script src="<?php echo get_bloginfo('template_directory'); ?>/js/jquery-3.3.1.min.js"></script>
     <script src="<?php echo get_bloginfo('template_directory'); ?>/js/bootstrap.bundle.js"></script>
@@ -393,7 +387,7 @@
     
     <!-- <script defer src="https://use.fontawesome.com/releases/v5.8.1/js/all.js" 
         integrity="sha384-g5uSoOSBd7KkhAMlnQILrecXvzst9TdC09/VM+pjDTCM+1il8RHz5fKANTFFb+gQ" crossorigin="anonymous"></script> -->
-	<script language="javascript" src="https://www.mptc.gov.kh/assets/js/typeahead.js" type=
+	<!-- <script language="javascript" src="https://www.mptc.gov.kh/assets/js/typeahead.js" type=
 	"text/javascript">
 	</script> 
 	<script language="javascript" src="https://www.mptc.gov.kh/assets/js/underscore-min.js" type=
@@ -414,46 +408,89 @@
 	<script language="javascript" src="https://www.mptc.gov.kh/assets/js/jquery.validate.min.js" type=
 	"text/javascript">
 	</script> 
-	<!-- <script language="javascript" src="https://www.mptc.gov.kh/assets/js/jquery.easing.1.3.js" type=
+	<script language="javascript" src="https://www.mptc.gov.kh/assets/js/jquery.easing.1.3.js" type=
 	"text/javascript">
 	</script> 
 	<script language="javascript" src=
 	"https://www.mptc.gov.kh/assets/js/jquery.easing.compatibility.js" type="text/javascript">
-	</script>  -->
+	</script> 
 	<script language="javascript" src=
 	"https://www.mptc.gov.kh/assets/js/crop/jquery.resizecrop-1.0.3.min.js" type="text/javascript">
 	</script> 
 	<script language="javascript" src="https://www.mptc.gov.kh/assets/js/slick.min.js" type=
 	"text/javascript">
-	</script> 
+	</script>  -->
 	<script language="javascript" src="https://maps.google.com/maps/api/js?sensor=true">
 	</script> 
-	<!-- <script language="javascript" src="https://www.mptc.gov.kh/assets/js/google.js">
+	<script language="javascript" src="https://www.mptc.gov.kh/assets/js/google.js">
 	</script> 
 	<script language="javascript" src="https://www.mptc.gov.kh/assets/js/jquery.ui.map.js" type=
 	"text/javascript">
-	</script>  -->
+	</script> 
 	<script language="javascript" src="https://www.mptc.gov.kh/assets/js/lightbox/lightbox.min.js"
 	type="text/javascript">
 	</script> 
 	<script language="javascript" src="https://www.mptc.gov.kh/assets/js/crocodoc.viewer.min.js" type=
 	"text/javascript">
 	</script> 
-	<!-- <script language="javascript" src="https://www.mptc.gov.kh/assets/js/indexscript.js" type=
+	<script language="javascript" src="https://www.mptc.gov.kh/assets/js/indexscript.js" type=
 	"text/javascript">
-	</script>  -->
+	</script> 
 	<script language="javascript" src="https://www.mptc.gov.kh/assets/js/jquery-scrolltofixed-min.js"
 	type="text/javascript">
     </script>     
     <!-- <script type="text/javascript" src="//100widgets.com/js_data.php?id=174"></script> -->
+
+    <?php if (is_home()) { ?>
+    <!-- classie.js by @desandro: https://github.com/desandro/classie -->
+
+    <script src="<?php echo get_bloginfo('template_directory'); ?>/js/classie.js"></script>
+    <script src="<?php echo get_bloginfo('template_directory'); ?>/js/modalEffects.js"></script>
+
+    <!-- for the blur effect -->
+    <!-- by @derSchepp https://github.com/Schepp/CSS-Filters-Polyfill -->
+    <script>
+        // this is important for IEs
+        var polyfilter_scriptpath = '/js/';
+    </script>
+    <script src="<?php echo get_bloginfo('template_directory'); ?>/js/cssParser.js"></script>
+    <script src="<?php echo get_bloginfo('template_directory'); ?>/js/css-filters-polyfill.js"></script>
+    <?php } ?>
+
 	<script>
 	           $(document).ready(function() {
+                    // $('.forgot-link').click(function(){
+                    //     console.log('clicked');
+                    //     $('#tab-2').attr('checked', true);
+                    //     console.log( $('#tab-2').prop("checked"));
+                    // });
                     $('.breadcrumb a').addClass('hvr-underline-from-center');
                     $('.cat-post a').addClass('hvr-radial-out hvr-round-corners hvr-icon-wobble-horizontal').prepend('<i class="fas fa-arrow-right hvr-icon"></i>&nbsp;&nbsp;');
 	                $('.ticker-fixed').scrollToFixed();
                     $(function () {
                         $('[data-toggle="tooltip"]').tooltip();
                     });
+                    $(function() {
+                    // ------------------------------------------------------- //
+                    // Multi Level dropdowns
+                    // ------------------------------------------------------ //
+                        $("ul.dropdown-menu [data-toggle='dropdown']").on("click", function(event) {
+                            event.preventDefault();
+                            event.stopPropagation();
+
+                            $(this).siblings().toggleClass("show");
+
+
+                            if (!$(this).next().hasClass('show')) {
+                            $(this).parents('.dropdown-menu').first().find('.show').removeClass("show");
+                            }
+                            $(this).parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', function(e) {
+                            $('.dropdown-submenu .show').removeClass("show");
+                            });
+
+                        });
+                    });
+
                     $('#example1').DataTable({
                         responsive: true,
                         "language"  :   {
@@ -475,13 +512,14 @@
                    });
                    !function(d,s,id){
                        var js,fjs=d.getElementsByTagName(s)[0];
-                       if(!d.getElementById(id)){
-                           js=d.createElement(s);
-                           js.id=id;
-                           js.src='https://weatherwidget.io/js/widget.min.js';
-                           fjs.parentNode.insertBefore(js,fjs);
+                       if(!d.getElementById(id)) {
+                            js=d.createElement(s);
+                            js.id=id;
+                            js.src='https://weatherwidget.io/js/widget.min.js';
+                            fjs.parentNode.insertBefore(js,fjs);
                         }
                     }(document,'script','weatherwidget-io-js');
+                   
                 //    alert('finished');
                 //    $('#example2').DataTable({
                 //         'paging'      : true,
@@ -522,7 +560,7 @@
 
             // Check if the viewport is set, if the viewport is not set the SVG wont't scale.
             if(!$svg.attr('viewBox') && $svg.attr('height') && $svg.attr('width')) {
-                $svg.attr('viewBox', '0 0 ' + $svg.attr('height') + ' ' + $svg.attr('width'))
+                $svg.attr('viewBox', '0 0 ' + $svg.attr('width') + ' ' + $svg.attr('height'))
             }
 
             // Replace image with new SVG

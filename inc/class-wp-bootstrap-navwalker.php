@@ -134,9 +134,15 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 
 			// Add .dropdown or .active classes where they are needed.
 			if ( isset( $args->has_children ) && $args->has_children ) {
-				$classes[] = 'dropdown';
-			}
-			if ( in_array( 'current-menu-item', $classes, true ) || in_array( 'current-menu-parent', $classes, true ) ) {
+				if ( $depth < 1 )
+					$classes[] = 'dropdown';
+				else
+					$classes[] = 'dropdown-submenu';
+			} 
+
+			if ( in_array( 'current-menu-item', $classes, true ) || in_array( 'current-menu-parent', $classes, true )
+				 || in_array('current-page-ancestor', $classes, true) || in_array('current-post-ancestor', $classes, true)
+				 || in_array('current-menu-ancestor', $classes, true) || in_array('current-post-parent', $classes, true)) {
 				$classes[] = 'active';
 			}
 
@@ -191,8 +197,13 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			} else {
 				$atts['href'] = ! empty( $item->url ) ? $item->url : '#';
 				// Items in dropdowns use .dropdown-item instead of .nav-link.
-				if ( $depth > 0 ) {
-					$atts['class'] = 'dropdown-item';
+				if ( $depth > 0 && $args->has_children ) {
+					// $atts['class'] = 'dropdown-item dropdown-toggle';
+					$atts['data-toggle']   = 'dropdown';
+					// $atts['aria-haspopup'] = 'true';
+					// $atts['aria-expanded'] = 'false';
+					$atts['class']         = 'dropdown-toggle nav-link';
+					$atts['id']            = 'menu-item-dropdown-' . $item->ID;
 				} else {
 					$atts['class'] = 'nav-link';
 				}
@@ -551,5 +562,22 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			}
 			return $output;
 		}
+		
 	}
+}
+
+add_filter('wp_nav_menu_objects', 'add_menu_parent_class');
+function add_menu_parent_class($items){
+    $parents = array();
+    foreach ($items as $item){
+        if (in_array('current-post-ancestor', $item->classes)){
+            $parents[] = $item->menu_item_parent;
+        }
+    }
+    foreach($items as $item){
+        if(in_array($item->ID, $parents)){
+            $item->classes[] = 'current-menu-ancestor'; 
+        }
+    }
+    return $items;    
 }

@@ -26,7 +26,8 @@ add_action( 'init', 'custom_new_menu' );
 
 function add_file_types_to_uploads($file_types){
     $new_filetypes = array();
-    $new_filetypes['svg'] = 'image/svg+xml';
+	$new_filetypes['svg'] = 'image/svg+xml';
+	$new_filetypes['webp'] = 'image/webp';
     $file_types = array_merge($file_types, $new_filetypes );
     return $file_types;
 }
@@ -83,13 +84,15 @@ add_action('upload_mimes', 'add_file_types_to_uploads');
 	function modify_date_format(){
 		$month_names = array(1=>'មករា','កុម្ភៈ','មីនា','មេសា','ឧសភា','មិថុនា','កក្កដា','សីហា','កញ្ញា','តុលា','វិច្ឆិកា','ធ្នូ');
 		$week_names = array(1=>'ថ្ងៃចន្ទ','ថ្ងៃអង្គារ','ថ្ងៃពុធ','ថ្ងៃព្រហស្បតិ៍','ថ្ងៃសុក្រ','ថ្ងៃសៅរ៍','ថ្ងៃអាទិត្យ');
-		return $week_names[get_the_time('w')].' ទី'.khmerNumber(get_the_time('j')).' ខែ'.$month_names[get_the_time('n')].' ឆ្នាំ'.khmerNumber(get_the_time('Y'));
+		return $week_names[get_the_time('w')].' ទី'.khmerNumber(get_the_time('j'), true).' ខែ'.$month_names[get_the_time('n')].' ឆ្នាំ'.khmerNumber(get_the_time('Y'));
 	}
 
-	function khmerNumber($input) {
+	function khmerNumber($input, $prefex_num = false) {
 		$standard_numsets = array("0","1","2","3","4","5","6","7","8","9");
 		$khmer_numsets = array("០","១","២","៣","៤","៥","៦","៧","៨","៩");
-		return str_replace($standard_numsets, $khmer_numsets, $input);
+		$result = str_replace($standard_numsets, $khmer_numsets, $input);
+		if($prefex_num) $result = strlen($input) == 1 ? '០' . $result : $result;
+		return $result;
 	}
 	// function khmerDate() {
 	// 	$date = sprintf( '<a href="%1$s" title="%2$s" rel="bookmark"><time class="entry-date" datetime="%3$s">%4$s</time></a>',
@@ -109,6 +112,129 @@ add_action('upload_mimes', 'add_file_types_to_uploads');
 	// 					$date = str_replace('9', '៩', $date);
 	// 					$date = str_replace('0', '០', $date);
 	// 	printf($date); 
+	// }
+
+	function human_time_diff_kh( $from, $to = '' ) {
+		if ( empty( $to ) ) {
+			$to = time();
+		}
+
+		$time_suffex = '';
+	 
+		$diff = (int) abs( $to - $from );
+	 
+		if ( $diff < HOUR_IN_SECONDS ) {
+			$mins = round( $diff / MINUTE_IN_SECONDS );
+			if ( $mins <= 1 ) {
+				$mins = 1;
+			}
+			$mins = khmerNumber($mins);
+			$time_suffex = 'នាទី';
+			/* translators: Time difference between two dates, in minutes (min=minute). %s: Number of minutes */
+			$since = sprintf( _n( '%s' . $time_suffex, '%s' . $time_suffex, $mins ), $mins );
+		} elseif ( $diff < DAY_IN_SECONDS && $diff >= HOUR_IN_SECONDS ) {
+			$hours = round( $diff / HOUR_IN_SECONDS );
+			if ( $hours <= 1 ) {
+				$hours = 1;
+			}
+			$hours = khmerNumber($hours);
+			$time_suffex = 'ម៉ោង';
+			/* translators: Time difference between two dates, in hours. %s: Number of hours */
+			$since = sprintf( _n( '%s' . $time_suffex, '%s' . $time_suffex, $hours ), $hours );
+		} elseif ( $diff < WEEK_IN_SECONDS && $diff >= DAY_IN_SECONDS ) {
+			$days = round( $diff / DAY_IN_SECONDS );
+			if ( $days <= 1 ) {
+				$time_suffex = 'ម្សិលម៉ិញ';
+				$days = '';
+			}  else {
+				$time_suffex = 'ថ្ងៃ';
+				$days = khmerNumber($days);
+			}
+			/* translators: Time difference between two dates, in days. %s: Number of days */
+			$since = sprintf( _n( '%s' . $time_suffex, '%s' . $time_suffex, $days ), $days );
+		} elseif ( $diff < MONTH_IN_SECONDS && $diff >= WEEK_IN_SECONDS ) {
+			$weeks = round( $diff / WEEK_IN_SECONDS );
+			if ( $weeks <= 1 ) {
+				$weeks = 1;
+			}
+			$weeks = khmerNumber($weeks);
+			$time_suffex = 'សប្ដាហ៍';
+			/* translators: Time difference between two dates, in weeks. %s: Number of weeks */
+			$since = sprintf( _n( '%s' . $time_suffex, '%s' . $time_suffex, $weeks ), $weeks );
+		} elseif ( $diff < YEAR_IN_SECONDS && $diff >= MONTH_IN_SECONDS ) {
+			$months = round( $diff / MONTH_IN_SECONDS );
+			if ( $months <= 1 ) {
+				$months = 1;
+			}
+			$months = khmerNumber($months);
+			$time_suffex = 'ខែ';
+			/* translators: Time difference between two dates, in months. %s: Number of months */
+			$since = sprintf( _n( '%s' . $time_suffex, '%s' . $time_suffex, $months ), $months );
+		} elseif ( $diff >= YEAR_IN_SECONDS ) {
+			$years = round( $diff / YEAR_IN_SECONDS );
+			if ( $years <= 1 ) {
+				$years = 1;
+			}
+			$years = khmerNumber($years);
+			$time_suffex = 'ឆ្នាំ';
+			/* translators: Time difference between two dates, in years. %s: Number of years */
+			$since = sprintf( _n( '%s' . $time_suffex, '%s' . $time_suffex, $years ), $years );
+		}
+	 
+		/**
+		 * Filters the human readable difference between two timestamps.
+		 *
+		 * @since 4.0.0
+		 *
+		 * @param string $since The difference in human readable text.
+		 * @param int    $diff  The difference in seconds.
+		 * @param int    $from  Unix timestamp from which the difference begins.
+		 * @param int    $to    Unix timestamp to end the time difference.
+		 */
+		return apply_filters( 'human_time_diff', $since, $diff, $from, $to );
+	}
+
+	// Get the time ago format in post
+	function dynamictime() {
+		global $post;
+		$date = $post->post_date;
+		$time = get_post_time('G', true, $post);
+		$mytime = (int) abs(time() - $time);
+		$time_suffex = '';
+		if($mytime > 0 && $mytime < DAY_IN_SECONDS || $mytime >= 2 * DAY_IN_SECONDS)
+			$time_suffex = 'មុន';
+			// $mytimestamp = sprintf(__('%sមុន'), human_time_diff_kh($time));
+		// else if($mytime < 2 * DAY_IN_SECONDS) && round($mytime / DAY_IN_SECONDS) <= 1)
+			// $mytimestamp = sprintf(__('%s'), human_time_diff_kh($time)) . $time_suffex;
+			// $time_suffex = '';
+		// else if($mytime < 365*24*60*60)
+			// $time_suffex = 'មុន';
+			// $mytimestamp = sprintf(__('%sមុន'), human_time_diff_kh($time));
+		// else
+		$mytimestamp = sprintf(__('%s'), human_time_diff_kh($time)) . $time_suffex;
+		  	//$mytimestamp = date(get_option('date_format'), strtotime($date));
+		return $mytimestamp;
+	}
+
+	// Get Post Label base on Published Date
+	function get_post_label($post_date, $label, $optional = false) {
+		$time = (int) abs(time() - get_post_time());
+
+		if($optional) {
+			$label = '<i class="notes"> ' . $label . '</i>';
+		}
+
+		if($time > 0 && $time <= 15 * DAY_IN_SECONDS) 
+			$label = '<span class="badge badge-pill badge-danger">' . $label . '</span>';
+		else 
+			$label = '';
+		return $label;
+	}
+
+	// function meks_convert_to_time_ago( $orig_time ) {
+	// 	global $post;
+	// 	$orig_time = strtotime( $post->post_date ); 
+	// 	return human_time_diff( $orig_time, current_time( 'timestamp' ) ).' '.__( 'ago' );
 	// }
 
 	// Shorten the text base on characters
@@ -183,7 +309,7 @@ add_action('upload_mimes', 'add_file_types_to_uploads');
 		// Defaults
 		$defaults = array(
 			'post'            => '',
-			'length'          => 40,
+			'length'          => 30,
 			'readmore'        => false,
 			'readmore_text'   => esc_html__( 'read more', 'text-domain' ),
 			'readmore_after'  => '',
@@ -1412,8 +1538,8 @@ add_action('upload_mimes', 'add_file_types_to_uploads');
 
 	/* Show Continue Reading */
 
-	function get_continue($text) {
-		$svg = 	'<a class="cta" href="#">
+	function get_continue($text, $link, $post, $limit) {
+		$svg = 	$post > $limit ? '<a class="cta" href="' . $link . '">
 					<span class="continues">' . $text . '</span> 
 					<span class="continues">
 						<svg class="sign-next" height="17px" version="1.1" viewbox="0 0 66 43" width="17px" xmlns="http://www.w3.org/2000/svg">
@@ -1445,9 +1571,49 @@ add_action('upload_mimes', 'add_file_types_to_uploads');
 							</g>
 						</svg>
 					</span>
-				</a>';
+				</a>' : '';
 		return $svg;
 	}
+
+	// Feature Post
+	function mop_custom_meta() {
+		add_meta_box('mop_meta', __('Featured Posts', 'mop-textdomain'), 'mop_meta_callback', 'post', 'side');
+	}
+	function mop_meta_callback($post) {
+		$featured = get_post_meta($post->ID);
+		echo '<p>
+				<div class="sm-row-content">
+					<label for="meta-checkbox">
+						<input type="checkbox" name="meta-checkbox" id="meta-checkbox" value="yes"';
+						if(isset($featured['meta-checkbox'])) checked($featured['meta-checkbox'][0], 'yes') . '/>';
+						// _e('Featured this post', 'mop-textdomain');
+		echo 'Featured this post </label></div></p>';
+	}
+	add_action('add_meta_boxes', 'mop_custom_meta');
+
+	/**
+	 * Saves the custom meta input
+	 */
+	function mop_meta_save($post_id) {
+		// Checks save status
+		$is_autosave = wp_is_post_autosave($post_id);
+		$is_revision = wp_is_post_revision($post_id);
+		$is_valid_nonce = (isset($_POST['mop_nonce']) && wp_verify_nonce($_POST['mop_nonce'], basename(__FILE__))) ? 'true' : 'false';
+	
+		// Exits script depending on save status
+		if ($is_autosave || $is_revision || !$is_valid_nonce ) {
+			return;
+		}
+	
+		// Checks for input and saves
+		if(isset($_POST['meta-checkbox'])) {
+			update_post_meta($post_id, 'meta-checkbox', 'yes');
+		} else {
+			update_post_meta($post_id,'meta-checkbox', '');
+		}
+	}
+	add_action( 'save_post', 'mop_meta_save' );
+	
 	
 /*
 * Loads the MoP Customizer for live customization, to learn more visit Themonic.com
