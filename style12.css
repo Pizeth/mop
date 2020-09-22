@@ -1,14 +1,26 @@
 /*
 ::::::::::::Stylesheet by:::::::::::
 ::  Name: Mam Piseth              ::
-::  Email: seth.razeth@snt.gov.kh ::
+::  Email: piseth.mam@snt.gov.kh ::
 :::::::::::::::::::::::::::::::::::: 
 Theme Name: MoP WordPress
+Theme URI: https://github.com/Pizeth/mop
 Author: Piseth Mam
-Description: Bootstrap template converted to WordPress
-Version: 0.0.1
-Tags: bootstrap, MoP
+Author URI: https://razeth.net
+Description: Bootstrap template converted to WordPress. Suitable for Government.
+License: GNU General Public License, version 3 (GPLv3)
+License URI: http://www.gnu.org/licenses/gpl-3.0.txt
+Version: 0.0.1 beta
+Tags: bootstrap, MoP, Razeth, one-column, two-columns, right-sidebar, left-sidebar, flexible-header, custom-header, custom-background, custom-menu, custom-colors, sticky-post, threaded-comments, translation-ready, featured-images, theme-options, post-formats, footer-widgets, blog, e-commerce, news, rtl-language-support
+Text Domain: Ministry of Planning
+
 */
+/*==========  Gray colors  ==========*/
+/*=====  Light colors  ======*/
+/*==========  Brand-colors  ==========*/
+/*==========  social links colors  ==========*/
+/* =Reset
+-------------------------------------------------------------- */
 @charset "utf-8";
 @import url('css/bootstrap.css');
 @import url('css/flag-icon.css');
